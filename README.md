@@ -1,6 +1,6 @@
 # DevOps Todo App
 
-A compact Todo application used to practice frontend/backend separation, Docker packaging, and GitHub Actions deployment workflow basics.
+A compact Todo lab used to practice static frontend delivery, a minimal Node.js backend, Docker packaging, and GitHub Actions deployment workflow basics.
 
 This is a supporting lab project. It is useful for demonstrating delivery fundamentals, while larger portfolio projects show deeper DevOps and operations work.
 
@@ -8,35 +8,45 @@ This is a supporting lab project. It is useful for demonstrating delivery fundam
 
 ```text
 app/                    Static frontend
-backend/                Node.js backend service
-Dockerfile              Container packaging example
+backend/                Express backend with /health endpoint
+Dockerfile              NGINX container for the static frontend
 .github/workflows/      GitHub Actions deployment workflow
 .gitignore              Local dependency hygiene
 ```
 
 ## DevOps evidence
 
-- Containerization with a root `Dockerfile`
-- GitHub Actions workflow in `.github/workflows/deploy.yml`
-- Backend dependency lock file for reproducible installs
-- Clear separation between static frontend and API service
+- GitHub Actions deployment workflow using SSH secrets
+- Static frontend containerization with NGINX
+- Backend health endpoint for basic service verification
+- Reproducible Node.js dependency lock file
+- Runnable backend scripts: `npm start` and `npm test`
 
-## Local run
-
-Install backend dependencies:
+## Local backend run
 
 ```bash
 cd backend
 npm install
-```
-
-Start the backend if the package scripts support it:
-
-```bash
+npm test
 npm start
 ```
 
-Open the static frontend from `app/index.html` or serve it with a simple local static server.
+Health check:
+
+```bash
+curl http://localhost:3000/health
+```
+
+## Static frontend run
+
+Open `app/index.html` directly in a browser, or build the static container:
+
+```bash
+docker build -t devops-todo-static .
+docker run --rm -p 8080:80 devops-todo-static
+```
+
+Then open `http://localhost:8080`.
 
 ## Portfolio role
 
@@ -49,7 +59,7 @@ Use this repo as a small DevOps practice example. For resume-facing projects, le
 
 ## Improvement backlog
 
-- Add a health endpoint to the backend.
-- Add automated backend tests.
+- Add real API routes for Todo CRUD operations.
+- Add automated HTTP tests for `/` and `/health`.
 - Add Docker Compose if a database or additional service is introduced.
 - Add environment-variable based configuration before using it for any real deployment.
