@@ -1,12 +1,17 @@
 {
-  "name": "backend",
+  "name": "devops-todo-backend",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Minimal Express backend for the DevOps Todo App lab.",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js",
+    "test": "node --check server.js"
   },
-  "keywords": [],
+  "keywords": [
+    "express",
+    "devops",
+    "health-check"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
